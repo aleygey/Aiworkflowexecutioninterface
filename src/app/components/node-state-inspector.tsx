@@ -22,9 +22,9 @@ interface NodeStateInspectorProps {
 }
 
 const statusConfig = {
-  running: { icon: Loader2, color: 'text-blue-400', bg: 'bg-blue-500/10' },
-  completed: { icon: CheckCircle2, color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
-  failed: { icon: XCircle, color: 'text-red-400', bg: 'bg-red-500/10' },
+  running: { icon: Loader2, color: 'text-foreground', bg: 'bg-muted/40' },
+  completed: { icon: CheckCircle2, color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
+  failed: { icon: XCircle, color: 'text-muted-foreground', bg: 'bg-muted/40' },
   pending: { icon: Circle, color: 'text-muted-foreground', bg: 'bg-muted/30' },
 };
 

@@ -21,8 +21,8 @@ const statusConfig = {
   },
   running: {
     icon: Loader2,
-    color: 'text-blue-500',
-    bgColor: 'bg-blue-500/10',
+    color: 'text-foreground',
+    bgColor: 'bg-muted/40',
   },
   completed: {
     icon: CheckCircle2,
@@ -31,8 +31,8 @@ const statusConfig = {
   },
   failed: {
     icon: XCircle,
-    color: 'text-red-500',
-    bgColor: 'bg-red-500/10',
+    color: 'text-muted-foreground',
+    bgColor: 'bg-muted/40',
   },
 };
 
@@ -48,7 +48,7 @@ export function WorkflowNode({ id, title, type, status, isSelected, onClick }: W
       className={`
         relative rounded-xl p-4 cursor-pointer transition-all duration-200
         ${isSelected ? 'bg-background shadow-lg' : 'bg-background/60 shadow-md hover:shadow-lg'}
-        ${isRunning ? 'ring-2 ring-blue-500/50' : ''}
+        ${isRunning ? 'ring-1 ring-foreground/20' : ''}
       `}
       style={{
         backdropFilter: 'blur(8px)',
@@ -60,7 +60,7 @@ export function WorkflowNode({ id, title, type, status, isSelected, onClick }: W
         <motion.div
           className="absolute inset-0 rounded-xl"
           style={{
-            background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent)',
+            background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent)',
           }}
           animate={{
             x: ['-100%', '200%'],

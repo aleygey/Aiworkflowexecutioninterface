@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
 import { SessionTopBar } from '../components/session-top-bar';
 import { ChatSessionPanel } from '../components/chat-session-panel';
 import { CodeDiffViewer } from '../components/code-diff-viewer';
@@ -157,6 +158,8 @@ const mockNodeState = {
 };
 
 export function SessionDetailView() {
+  const navigate = useNavigate();
+  const { sessionId } = useParams();
   const [messages, setMessages] = useState(mockMessages);
 
   const handleSendMessage = (message: string) => {
@@ -181,14 +184,14 @@ export function SessionDetailView() {
   };
 
   const handleBack = () => {
-    window.history.back();
+    navigate('/');
   };
 
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-background via-background to-muted/20">
       {/* Top Bar */}
       <SessionTopBar
-        sessionTitle="Session: Fancy hello C on target via ttyS0"
+        sessionTitle={`Session: ${sessionId || 'Unknown'}`}
         status="running"
         onBack={handleBack}
         onStop={() => console.log('Stop')}

@@ -1,4 +1,4 @@
-import { Play, Square, MessageSquare, Settings } from 'lucide-react';
+import { Play, Square, MessageSquare, Settings, Eye, Plus } from 'lucide-react';
 import { Button } from './ui/button';
 
 interface TopBarProps {
@@ -6,21 +6,34 @@ interface TopBarProps {
   sessionStatus: 'running' | 'completed' | 'failed' | 'idle';
   environment: string;
   onSessionClick: () => void;
+  onDetailView?: () => void;
+  onTaskSidebarToggle?: () => void;
 }
 
 const statusConfig = {
-  running: { color: 'text-blue-500', bg: 'bg-blue-500/10', label: 'Running' },
+  running: { color: 'text-foreground', bg: 'bg-muted/40', label: 'Running' },
   completed: { color: 'text-emerald-500', bg: 'bg-emerald-500/10', label: 'Completed' },
-  failed: { color: 'text-red-500', bg: 'bg-red-500/10', label: 'Failed' },
+  failed: { color: 'text-muted-foreground', bg: 'bg-muted/40', label: 'Failed' },
   idle: { color: 'text-muted-foreground', bg: 'bg-muted/30', label: 'Idle' },
 };
 
-export function TopBar({ workflowTitle, sessionStatus, environment, onSessionClick }: TopBarProps) {
+export function TopBar({ workflowTitle, sessionStatus, environment, onSessionClick, onDetailView, onTaskSidebarToggle }: TopBarProps) {
   const status = statusConfig[sessionStatus];
 
   return (
     <div className="h-14 border-b border-border/50 bg-background/80 backdrop-blur-sm flex items-center justify-between px-6">
       <div className="flex items-center gap-4">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-8 w-8 p-0"
+          onClick={onTaskSidebarToggle}
+        >
+          <Plus className="w-4 h-4" />
+        </Button>
+
+        <div className="w-px h-6 bg-border/50" />
+
         <h1 className="text-sm font-medium text-foreground">{workflowTitle}</h1>
         
         <div className="flex items-center gap-2">
@@ -36,6 +49,18 @@ export function TopBar({ workflowTitle, sessionStatus, environment, onSessionCli
       </div>
 
       <div className="flex items-center gap-2">
+        {onDetailView && (
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-8 text-xs"
+            onClick={onDetailView}
+          >
+            <Eye className="w-4 h-4 mr-2" />
+            Detail View
+          </Button>
+        )}
+        
         <Button
           variant="ghost"
           size="sm"

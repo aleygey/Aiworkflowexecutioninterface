@@ -5,6 +5,7 @@ import { WorkflowCanvas } from '../components/workflow-canvas';
 import { EnhancedInspectorPanel } from '../components/enhanced-inspector-panel';
 import { ChatPanel } from '../components/chat-panel';
 import { SessionDialog } from '../components/session-dialog';
+import { TaskSidebar, Task } from '../components/task-sidebar';
 
 // Mock data
 const mockNodes = [
@@ -217,11 +218,49 @@ const mockMessages = [
   },
 ];
 
+// Mock tasks
+const mockTasks: Task[] = [
+  {
+    id: 'task-1',
+    title: 'Fancy hello C on target via ttyS0',
+    status: 'running',
+    environment: 'ARM Linux',
+    timestamp: '2 hours ago',
+    nodeCount: 5,
+  },
+  {
+    id: 'task-2',
+    title: 'Deploy web server to production',
+    status: 'completed',
+    environment: 'AWS EC2',
+    timestamp: '1 day ago',
+    nodeCount: 8,
+  },
+  {
+    id: 'task-3',
+    title: 'Database migration and backup',
+    status: 'completed',
+    environment: 'PostgreSQL',
+    timestamp: '3 days ago',
+    nodeCount: 4,
+  },
+  {
+    id: 'task-4',
+    title: 'API integration testing',
+    status: 'idle',
+    environment: 'Node.js',
+    timestamp: '1 week ago',
+    nodeCount: 6,
+  },
+];
+
 export function Dashboard() {
   const navigate = useNavigate();
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>('node-3');
   const [sessionDialogOpen, setSessionDialogOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState(mockMessages);
+  const [taskSidebarOpen, setTaskSidebarOpen] = useState(false);
+  const [currentTaskId, setCurrentTaskId] = useState('task-1');
 
   const selectedNodeDetails = selectedNodeId
     ? mockNodeDetails[selectedNodeId as keyof typeof mockNodeDetails] || null
@@ -252,6 +291,24 @@ export function Dashboard() {
     navigate('/session/ses_2f9caefa3ffe');
   };
 
+  // Navigate to session detail view when node is clicked
+  const handleNodeClick = (nodeId: string) => {
+    navigate(`/session/${nodeId}`);
+  };
+
+  const handleTaskSelect = (taskId: string) => {
+    setCurrentTaskId(taskId);
+    setTaskSidebarOpen(false);
+    // In a real app, this would load the task's data
+    console.log('Switched to task:', taskId);
+  };
+
+  const handleNewTask = () => {
+    console.log('Create new task');
+    setTaskSidebarOpen(false);
+    // In a real app, this would create a new task
+  };
+
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-background via-background to-muted/20">
       <TopBar
@@ -260,17 +317,18 @@ export function Dashboard() {
         environment="ARM Linux"
         onSessionClick={() => setSessionDialogOpen(true)}
         onDetailView={handleNodeDoubleClick}
+        onTaskSidebarToggle={() => setTaskSidebarOpen(true)}
       />
 
       <div className="flex-1 flex overflow-hidden">
         {/* Main Workspace - Split Layout */}
         <div className="flex-1 flex gap-px bg-border/30">
           {/* Left Side - Workflow Canvas */}
-          <div className="flex-1 bg-background/40" onDoubleClick={handleNodeDoubleClick}>
+          <div className="flex-1 bg-background/40">
             <WorkflowCanvas
               nodes={mockNodes}
               selectedNodeId={selectedNodeId}
-              onNodeSelect={setSelectedNodeId}
+              onNodeSelect={handleNodeClick}
             />
           </div>
 
@@ -293,6 +351,16 @@ export function Dashboard() {
         open={sessionDialogOpen}
         onOpenChange={setSessionDialogOpen}
         messages={mockMessages}
+      />
+
+      {/* Task Sidebar */}
+      <TaskSidebar
+        open={taskSidebarOpen}
+        onOpenChange={setTaskSidebarOpen}
+        tasks={mockTasks}
+        currentTaskId={currentTaskId}
+        onTaskSelect={handleTaskSelect}
+        onNewTask={handleNewTask}
       />
     </div>
   );

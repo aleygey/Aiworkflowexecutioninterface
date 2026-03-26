@@ -66,7 +66,7 @@ export function CodeDiffViewer({ diffs }: CodeDiffViewerProps) {
                     <span className="text-emerald-400 text-xs">+{diff.additions}</span>
                   )}
                   {diff.deletions > 0 && (
-                    <span className="text-red-400 text-xs">-{diff.deletions}</span>
+                    <span className="text-muted-foreground text-xs">-{diff.deletions}</span>
                   )}
                 </div>
               </div>
@@ -95,14 +95,14 @@ export function CodeDiffViewer({ diffs }: CodeDiffViewerProps) {
               lineNumberColor = 'text-emerald-400';
               icon = <Plus className="w-3 h-3 text-emerald-400" />;
             } else if (line.type === 'removed') {
-              bgColor = 'bg-red-500/10 hover:bg-red-500/15';
-              textColor = 'text-red-300';
-              lineNumberColor = 'text-red-400';
-              icon = <Minus className="w-3 h-3 text-red-400" />;
+              bgColor = 'bg-muted/30 hover:bg-muted/40';
+              textColor = 'text-muted-foreground';
+              lineNumberColor = 'text-muted-foreground/70';
+              icon = <Minus className="w-3 h-3 text-muted-foreground/70" />;
             } else if (line.type === 'header') {
-              bgColor = 'bg-blue-500/10';
-              textColor = 'text-blue-300';
-              lineNumberColor = 'text-blue-400';
+              bgColor = 'bg-muted/20';
+              textColor = 'text-muted-foreground';
+              lineNumberColor = 'text-muted-foreground/70';
             } else {
               bgColor = 'hover:bg-muted/30';
             }
@@ -114,7 +114,7 @@ export function CodeDiffViewer({ diffs }: CodeDiffViewerProps) {
                   line.type === 'added'
                     ? 'border-emerald-500/50'
                     : line.type === 'removed'
-                    ? 'border-red-500/50'
+                    ? 'border-muted-foreground/30'
                     : 'border-transparent'
                 }`}
               >
@@ -140,8 +140,8 @@ export function CodeDiffViewer({ diffs }: CodeDiffViewerProps) {
           <span className="text-emerald-400">{currentDiff.additions} additions</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <Minus className="w-3 h-3 text-red-400" />
-          <span className="text-red-400">{currentDiff.deletions} deletions</span>
+          <Minus className="w-3 h-3 text-muted-foreground" />
+          <span className="text-muted-foreground">{currentDiff.deletions} deletions</span>
         </div>
       </div>
     </div>

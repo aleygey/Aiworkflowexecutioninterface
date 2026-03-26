@@ -16,10 +16,10 @@ interface ChatSessionPanelProps {
 }
 
 const roleConfig = {
-  system: { icon: Terminal, color: 'text-purple-400', bg: 'bg-purple-500/10', label: 'System' },
-  assistant: { icon: Bot, color: 'text-emerald-400', bg: 'bg-emerald-500/10', label: 'Agent' },
-  user: { icon: User, color: 'text-blue-400', bg: 'bg-blue-500/10', label: 'You' },
-  tool: { icon: Code, color: 'text-amber-400', bg: 'bg-amber-500/10', label: 'Tool' },
+  system: { icon: Terminal, color: 'text-muted-foreground', bg: 'bg-muted/30', label: 'System' },
+  assistant: { icon: Bot, color: 'text-foreground', bg: 'bg-muted/40', label: 'Agent' },
+  user: { icon: User, color: 'text-foreground', bg: 'bg-muted/40', label: 'You' },
+  tool: { icon: Code, color: 'text-muted-foreground', bg: 'bg-muted/30', label: 'Tool' },
 };
 
 export function ChatSessionPanel({ messages, onSendMessage }: ChatSessionPanelProps) {

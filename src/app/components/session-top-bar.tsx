@@ -11,9 +11,9 @@ interface SessionTopBarProps {
 }
 
 const statusConfig = {
-  running: { icon: Loader2, label: 'Running', color: 'text-blue-400', bg: 'bg-blue-500/10' },
-  completed: { icon: CheckCircle2, label: 'Completed', color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
-  failed: { icon: XCircle, label: 'Failed', color: 'text-red-400', bg: 'bg-red-500/10' },
+  running: { icon: Loader2, label: 'Running', color: 'text-foreground', bg: 'bg-muted/40' },
+  completed: { icon: CheckCircle2, label: 'Completed', color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
+  failed: { icon: XCircle, label: 'Failed', color: 'text-muted-foreground', bg: 'bg-muted/40' },
   idle: { icon: Square, label: 'Idle', color: 'text-muted-foreground', bg: 'bg-muted/30' },
 };
 
@@ -58,7 +58,7 @@ export function SessionTopBar({
             variant="outline"
             size="sm"
             onClick={onStop}
-            className="border-red-500/30 text-red-400 hover:bg-red-500/10"
+            className="border-border/50"
           >
             <Square className="w-3.5 h-3.5 mr-2" />
             Stop
@@ -79,7 +79,7 @@ export function SessionTopBar({
           variant="outline"
           size="sm"
           onClick={onStep}
-          className="border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10"
+          className="border-border/50"
         >
           <SkipForward className="w-3.5 h-3.5 mr-2" />
           Step

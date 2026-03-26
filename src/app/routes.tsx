@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router';
-import App from './App';
+import { Dashboard } from './pages/dashboard';
 import { SessionDetailView } from './pages/session-detail';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    Component: App,
+    Component: Dashboard,
   },
   {
     path: '/session/:sessionId',
